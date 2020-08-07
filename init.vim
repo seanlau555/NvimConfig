@@ -63,6 +63,7 @@ Plug 'flazz/vim-colorschemes'
 "Plug '/home/mpaulson/personal/vim-be-good'
 " Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jremmen/vim-ripgrep'
 
 " my own vim plugin
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -70,7 +71,9 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-Plug 'kien/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'kien/ctrlp.vim'
+Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline-themes'
@@ -127,9 +130,9 @@ set background=dark
 "let g:go_highlight_variable_declarations = 1
 "let g:go_auto_sameids = 1
 
-" if executable('rg')
-    " let g:rg_derive_root='true'
-" endif
+if executable('rg')
+    let g:rg_derive_root='true'
+endif
 
 " let loaded_matchparen = 1
 let mapleader = " "
@@ -260,6 +263,14 @@ function! SyncTree()
         wincmd p
     endif
 endfunction
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
 
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
@@ -325,16 +336,14 @@ let g:ale_fixers = {
  \ 'javascript': ['eslint']
  \ }
 
-
-let g:ale_fixers = {
- \ 'javascript': ['eslint']
- \ }
-
 " let g:ale_sign_error = '❌'
 " let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
 " let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
+
+
+" let g:node_client_debug=1
 
 
 " autoformat
