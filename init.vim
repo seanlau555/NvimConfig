@@ -47,8 +47,8 @@ call plug#begin('~/.vim/plugged')
 " "Plug 'vim-utils/vim-man'
 " " Plug 'mbbill/undotree'
 " "Plug 'sheerun/vim-polyglot'
-" "Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" "Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 " "Plug 'vuciv/vim-bujo'
 
 " "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
@@ -63,7 +63,7 @@ Plug 'flazz/vim-colorschemes'
 "Plug '/home/mpaulson/personal/vim-be-good'
 " Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jremmen/vim-ripgrep'
+" Plug 'jremmen/vim-ripgrep'
 
 " my own vim plugin
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -73,13 +73,14 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
 " Plug 'kien/ctrlp.vim'
-Plug 'git@github.com:kien/ctrlp.vim.git'
+" Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'jparise/vim-graphql'
-Plug 'mxw/vim-jsx'
+" Plug 'mxw/vim-jsx'
+Plug 'sheerun/vim-polyglot'
 " Plug 'jiangmiao/auto-pairs'
 Plug 'w0rp/ale'
 " Plug 'prettier/vim-prettier', {
@@ -130,9 +131,11 @@ set background=dark
 "let g:go_highlight_variable_declarations = 1
 "let g:go_auto_sameids = 1
 
-if executable('rg')
-    let g:rg_derive_root='true'
-endif
+" if executable('rg')
+    " let g:rg_derive_root='true'
+" endif
+
+" command! -bang -nargs=* -complete=file Rg call fzf#vim#grep('rg --files --hidden --follow --smart-case --glob "!.git/*" --glob "!node_modules/*"' . <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " let loaded_matchparen = 1
 let mapleader = " "
@@ -263,16 +266,16 @@ function! SyncTree()
         wincmd p
     endif
 endfunction
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
 
-" Highlight currently open buffer in NERDTree
+"Allow NERDTree to show hidden files"
+let NERDTreeShowHidden=1
+
+
+
+
+
+
+"Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
 " copy and paste with clipboard
@@ -342,6 +345,16 @@ let g:ale_fix_on_save = 1
 " let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|ico|git|svn))$'
 
+" Fzf
+let $FZF_DEFAULT_OPTS='--reverse'
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+
+nnoremap <C-p> :Files<CR>
+nnoremap <C-o> :Buffers<CR>
+nnoremap <C-g> :GFiles<CR>
+nnoremap <C-f> :Rg<CR> 
+
+nnoremap <C-t> :bel terminal<CR>
 
 " let g:node_client_debug=1
 
