@@ -1,4 +1,4 @@
-syntax on
+" syntax on
 
 " set guicursor=
 " set noshowmatch
@@ -17,16 +17,19 @@ set noswapfile
 set nobackup
 " set undodir=~/.vim/undodir
 " set undofile
+set norelativenumber
+set synmaxcol=200
+
 set incsearch
 set termguicolors
-set scrolloff=8
-" set updatetime=300
+" set scrolloff=8
+" set updatetime=200
 set noshowmatch         " Don't match parentheses/brackets
 set nocursorline        " Don't paint cursor line
 set nocursorcolumn      " Don't paint cursor column
 set lazyredraw          " Wait to redraw
 set scrolljump=8        " Scroll 8 lines at a time at bottom/top
-
+" set regexpengine=1
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -166,6 +169,10 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " "my own command
 inoremap jj <ESC>
+inoremap <leader>w <Esc>:wa<cr>
+" noremap <leader>w :wa<cr>
+" 使用 leader + e 实现退出
+noremap <leader>e :q<cr>
 
 " "vim TODO
 "nmap <Leader>tu <Plug>BujoChecknormal
