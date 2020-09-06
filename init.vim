@@ -1,5 +1,4 @@
-" syntax on
-
+syntax on
 " set guicursor=
 " set noshowmatch
 set noerrorbells
@@ -29,7 +28,7 @@ set nocursorline        " Don't paint cursor line
 set nocursorcolumn      " Don't paint cursor column
 set lazyredraw          " Wait to redraw
 set scrolljump=8        " Scroll 8 lines at a time at bottom/top
-" set regexpengine=1
+set regexpengine=1
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -57,7 +56,7 @@ Plug 'junegunn/fzf.vim'
 " "  I AM SO SORRY FOR DOING COLOR SCHEMES IN MY VIMRC, BUT I HAVE
 " "  TOOOOOOOOOOOOO
 " "Plug 'morhetz/gruvbox'
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
 "Plug 'sainnhe/gruvbox-material'
 "Plug 'phanviet/vim-monokai-pro'
@@ -92,8 +91,27 @@ Plug 'w0rp/ale'
 "Plug 'leafgarland/typescript-vim'
 " Plug 'sbdchd/neoformat'
 " Plug 'maxmellon/vim-jsx-pretty'
+" The status bar
+Plug 'itchyny/lightline.vim'
+let g:lightline = { 
+      \  'colorscheme': 'challenger_deep',
+      \  'active': {
+      \    'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified', 'cocstatus', 'gitbranch']],
+      \  },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'gitbranch': 'FugitiveHead',
+      \ }
+      \}
 
+" " The status bar                                                                                                          
+" Plug 'vim-airline/vim-airline'                                                                                            
+" Plug 'vim-airline/vim-airline-themes'
+
+" Cool color theme
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 call plug#end()
+colorscheme challenger_deep
 
 " " gruvbox
 " "colorscheme gruvbox
@@ -108,8 +126,8 @@ call plug#end()
 " " onehalf
 " " set t_Co=256
 " " set cursorline
-colorscheme one
-set background=dark
+" colorscheme one
+" set background=dark
 " colorscheme onehalfdark
 " let g:airline_theme='onehalfdark'
 
@@ -141,7 +159,7 @@ set background=dark
 " command! -bang -nargs=* -complete=file Rg call fzf#vim#grep('rg --files --hidden --follow --smart-case --glob "!.git/*" --glob "!node_modules/*"' . <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " let loaded_matchparen = 1
-let mapleader = " "
+let mapleader = ","
 
 "let g:netrw_browse_split = 2
 "let g:netrw_banner = 0
@@ -372,3 +390,4 @@ nnoremap <C-t> :bel terminal<CR>
 " let g:autoformat_remove_trailing_spaces = 0
 " autocmd BufWrite * :Prettier
 " autocmd BufWrite *.js Neoformatnoremap jj <ESC>
+
