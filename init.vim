@@ -1,34 +1,34 @@
 syntax on
 " set guicursor=
 " set noshowmatch
-set noerrorbells
+" set noerrorbells
 set tabstop=2 softtabstop=2
 set shiftwidth=2
-set relativenumber
-set expandtab
+" set relativenumber
+" set expandtab
 set smartindent
 set nu
 set nowrap
-" set smartcase
-set noswapfile
-" set nohlsearch
-" set hidden
-set nobackup
-" set undodir=~/.vim/undodir
-" set undofile
-set norelativenumber
-set synmaxcol=200
+" " set smartcase
+" set noswapfile
+" " set nohlsearch
+" " set hidden
+" set nobackup
+" " set undodir=~/.vim/undodir
+" " set undofile
+" set norelativenumber
+" set synmaxcol=200
 
-set incsearch
+" set incsearch
 set termguicolors
-" set scrolloff=8
-" set updatetime=200
-set noshowmatch         " Don't match parentheses/brackets
-set nocursorline        " Don't paint cursor line
-set nocursorcolumn      " Don't paint cursor column
-set lazyredraw          " Wait to redraw
-set scrolljump=8        " Scroll 8 lines at a time at bottom/top
-set regexpengine=1
+" " set scrolloff=8
+" " set updatetime=200
+" set noshowmatch         " Don't match parentheses/brackets
+" set nocursorline        " Don't paint cursor line
+" set nocursorcolumn      " Don't paint cursor column
+" set lazyredraw          " Wait to redraw
+" set scrolljump=8        " Scroll 8 lines at a time at bottom/top
+" set regexpengine=1
 " Give more space for displaying messages.
 set cmdheight=2
 
@@ -60,8 +60,8 @@ Plug 'junegunn/fzf.vim'
 " Plug 'sonph/onehalf', {'rtp': 'vim/'}
 "Plug 'sainnhe/gruvbox-material'
 "Plug 'phanviet/vim-monokai-pro'
-Plug 'vim-airline/vim-airline'
-Plug 'flazz/vim-colorschemes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'flazz/vim-colorschemes'
 "Plug '/home/mpaulson/personal/vim-be-good'
 " Plug 'git@github.com:Valloric/YouCompleteMe.git'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -73,12 +73,12 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ryanoasis/vim-devicons'
-Plug 'jiangmiao/auto-pairs'
+" Plug 'jiangmiao/auto-pairs'
 " Plug 'kien/ctrlp.vim'
 " Plug 'git@github.com:kien/ctrlp.vim.git'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdcommenter'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline-themes'
 " Plug 'pangloss/vim-javascript'
 Plug 'jparise/vim-graphql'
 " Plug 'mxw/vim-jsx'
@@ -159,7 +159,7 @@ colorscheme challenger_deep
 " command! -bang -nargs=* -complete=file Rg call fzf#vim#grep('rg --files --hidden --follow --smart-case --glob "!.git/*" --glob "!node_modules/*"' . <q-args>, 1, fzf#vim#with_preview(), <bang>0)
 
 " let loaded_matchparen = 1
-let mapleader = ","
+let mapleader = " "
 
 "let g:netrw_browse_split = 2
 "let g:netrw_banner = 0
@@ -187,10 +187,9 @@ vnoremap K :m '<-2<CR>gv=gv
 
 " "my own command
 inoremap jj <ESC>
-inoremap <leader>w <Esc>:wa<cr>
+" inoremap <leader>w <Esc>:wa<cr>
 " noremap <leader>w :wa<cr>
-" 使用 leader + e 实现退出
-noremap <leader>e :q<cr>
+" noremap <leader>e :q<cr>
 
 " "vim TODO
 "nmap <Leader>tu <Plug>BujoChecknormal
@@ -287,8 +286,8 @@ endfunction
 " file, and we're not in vimdiff
 function! SyncTree()
     if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-        NERDTreeFind
-        wincmd p
+	NERDTreeFind
+	wincmd p
     endif
 endfunction
 
@@ -319,7 +318,7 @@ nmap <Leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 
 
 " Other
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 set mouse=a
 " coc config
 let g:coc_global_extensions = [
@@ -327,32 +326,32 @@ let g:coc_global_extensions = [
             \'coc-pairs',
             \'coc-json',
             \]
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
+" if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  " let g:coc_global_extensions += ['coc-prettier']
+" endif
 
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
+" if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  " let g:coc_global_extensions += ['coc-eslint']
+" endif
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction
 
-nnoremap <silent> K :call CocAction('doHover')<CR>
-function! ShowDocIfNoDiagnostic(timer_id)
-  if (coc#util#has_float() == 0)
-    silent call CocActionAsync('doHover')
-  endif
-endfunction
+" nnoremap <silent> K :call CocAction('doHover')<CR>
+" function! ShowDocIfNoDiagnostic(timer_id)
+  " if (coc#util#has_float() == 0)
+    " silent call CocActionAsync('doHover')
+  " endif
+" endfunction
 
-function! s:show_hover_doc()
-  call timer_start(500, 'ShowDocIfNoDiagnostic')
-endfunction
+" function! s:show_hover_doc()
+  " call timer_start(500, 'ShowDocIfNoDiagnostic')
+" endfunction
 
-autocmd CursorHoldI * :call <SID>show_hover_doc()
-autocmd CursorHold * :call <SID>show_hover_doc()
+" autocmd CursorHoldI * :call <SID>show_hover_doc()
+" autocmd CursorHold * :call <SID>show_hover_doc()
 
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
