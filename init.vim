@@ -12,13 +12,13 @@ set nowrap
 
 call plug#begin("~/.vim/plugged")
   " Theme
-	 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-	" Plug 'ayu-theme/ayu-vim'
-	"Plug 'sainnhe/forest-night'
+  Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+  " Plug 'ayu-theme/ayu-vim'
+  "Plug 'sainnhe/forest-night'
 
 
   " Language Client
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'neovim/nvim-lspconfig'
 
   " TypeScript Highlighting
@@ -26,8 +26,8 @@ call plug#begin("~/.vim/plugged")
   " Plug 'peitalin/vim-jsx-typescript'
   Plug 'sheerun/vim-polyglot'
 
-	" Git 
-	Plug 'Xuyuanp/nerdtree-git-plugin'
+  " Git 
+  Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
 
   " File Explorer with Icons
@@ -38,13 +38,13 @@ call plug#begin("~/.vim/plugged")
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 
-	" comment code with iterms settings
-	Plug 'scrooloose/nerdcommenter'
+  " comment code with iterms settings
+  Plug 'scrooloose/nerdcommenter'
 
-	" Auto formatting and import ordering
-	Plug 'w0rp/ale'
+  " Auto formatting and import ordering
+  Plug 'w0rp/ale'
 	
-	" The status bar
+  " The status bar
   Plug 'itchyny/lightline.vim'
   let g:lightline = { 
       \  'colorscheme': 'challenger_deep',
