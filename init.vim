@@ -20,8 +20,9 @@ set nowrap
 call plug#begin("~/.vim/plugged")
   " Theme
 	Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-	 "Plug 'ayu-theme/ayu-vim'
+	"Plug 'ayu-theme/ayu-vim'
 	"Plug 'sainnhe/forest-night'
+	Plug 'sonph/onehalf', {'rtp': 'vim/'}
 
   " Language Client
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -100,6 +101,8 @@ endif
 
 " Theme
 syntax enable
+colorscheme onehalfdark
+let g:airline_theme='onehalfdark'
  colorscheme challenger_deep
  "let ayucolor="mirage"
 " let ayucolor="dark"
