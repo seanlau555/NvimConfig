@@ -1,0 +1,61 @@
+{
+/** 
+  * Vim Settings
+  **/
+  "editor.lineNumbers": "relative",
+  "python.languageServer": "Microsoft",
+  "editor.columnSelection": false,
+
+
+  // vim settings
+  "vim.leader": ",",
+  "vim.easymotion": true,
+  "vim.surround": true,
+  "vim.useCtrlKeys": true,
+  "vim.useSystemClipboard": true,
+  // Insert mode
+  "vim.insertModeKeyBindings": [
+    // In insert mode jj to escape
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+  "vim.normalModeKeyBindings": [
+    {
+      "before" : ["<leader>","a"],
+      "commands" : [
+        "workbench.view.explorer"
+      ]
+    }
+  ],
+  // Visual mode
+  "vim.visualModeKeyBindings": [
+    // In visual mode i goes to insert mode
+    {
+      "before": ["i"],
+      "after": ["<Esc>", "i"]
+    }
+  ],
+  // Escaping from vim for below commands
+  "vim.handleKeys": {
+    // Select all
+    "<C-a>": false,
+    // VS Code search in file
+    "<C-f>": false,
+    // VS Code new marker @ next occurence
+    "<C-d>": false,
+    // Copy
+    "<C-c>": false,
+    // Cut
+    "<C-x>": false,
+    // Paste
+    "<C-v>": false,
+  },
+  "tabnine.experimentalAutoImports": true,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.list.automaticKeyboardNavigation": false,
+  "files.autoSave": "onWindowChange"
+  }
