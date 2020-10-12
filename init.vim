@@ -1,4 +1,4 @@
-" allow mouse to click 
+" allow mouse to click
 set relativenumber
 set mouse=a
 set encoding=utf-8
@@ -12,6 +12,7 @@ set shiftwidth=2
 set smartindent
 set nu
 set nowrap
+set noswapfile
 
 "set hidden  " allow buffer switching without saving
 "set showtabline=2  " always show tabline
@@ -22,11 +23,16 @@ call plug#begin("~/.vim/plugged")
 	Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 	"Plug 'ayu-theme/ayu-vim'
 	"Plug 'sainnhe/forest-night'
-	Plug 'sonph/onehalf', {'rtp': 'vim/'}
+	"Plug 'sonph/onehalf', {'rtp': 'vim/'}
+
 
   " Language Client
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  " Plug 'neovim/nvim-lspconfig'
+	 "LSP
+	"Plug 'neovim/nvim-lspconfig'
+	"Plug 'nvim-lua/diagnostic-nvim'
+	"Plug 'nvim-lua/lsp-status.nvim'
+
 
   " TypeScript Highlighting
   " Plug 'leafgarland/typescript-vim'
@@ -34,7 +40,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'sheerun/vim-polyglot'
 	"Plug 'nvim-treesitter/nvim-treesitter'
 
-	" Git 
+	" Git
 	Plug 'Xuyuanp/nerdtree-git-plugin'
   Plug 'airblade/vim-gitgutter'
 
@@ -43,6 +49,9 @@ call plug#begin("~/.vim/plugged")
   Plug 'ryanoasis/vim-devicons'
 
   " File Search
+	Plug 'nvim-lua/popup.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-lua/telescope.nvim'
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
 
@@ -55,11 +64,13 @@ call plug#begin("~/.vim/plugged")
 
 	" Auto formatting and import ordering
 	Plug 'w0rp/ale'
+	"Plugin 'mxw/vim-jsx'
+
 
 	" The status bar
 	Plug 'itchyny/lightline.vim'
 	Plug 'taohexxx/lightline-buffer'
-	let g:lightline = { 
+	let g:lightline = {
 			\  'colorscheme': 'challenger_deep',
 			\  'active': {
 			\    'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified', 'cocstatus', 'gitbranch']],
@@ -69,25 +80,6 @@ call plug#begin("~/.vim/plugged")
 			\   'gitbranch': 'FugitiveHead',
       \   'bufferinfo': 'lightline#buffer#bufferinfo',
 			\ },
-			"\ 'tabline': {
-    "\   'left': [ [ 'bufferinfo' ],
-    "\             [ 'separator' ],
-    "\             [ 'bufferbefore', 'buffercurrent', 'bufferafter' ], ],
-    "\   'right': [ [ 'close' ], ],
-    "\ },
-    "\ 'component_expand': {
-    "\   'buffercurrent': 'lightline#buffer#buffercurrent',
-    "\   'bufferbefore': 'lightline#buffer#bufferbefore',
-    "\   'bufferafter': 'lightline#buffer#bufferafter',
-    "\ },
-    "\ 'component_type': {
-    "\   'buffercurrent': 'tabsel',
-    "\   'bufferbefore': 'raw',
-    "\   'bufferafter': 'raw',
-    "\ },
-    "\ 'component': {
-    "\   'separator': '',
-    "\ }
 			\}
  "Plug 'vim-airline/vim-airline'
  "Plug 'vim-airline/vim-airline-themes'
@@ -101,9 +93,8 @@ endif
 
 " Theme
 syntax enable
-colorscheme onehalfdark
-let g:airline_theme='onehalfdark'
  colorscheme challenger_deep
+ "colorscheme onehalfdark
  "let ayucolor="mirage"
 " let ayucolor="dark"
  "colorscheme ayu
@@ -120,16 +111,44 @@ nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 nnoremap <C-i> :NERDTreeFocus<CR>
 
 
-" requires silversearcher-ag
-" used to ignore gitignore files
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-" fzf config
-let $FZF_DEFAULT_OPTS='--reverse'
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
-nnoremap <C-p> :Files<CR>
-nnoremap <C-o> :Buffers<CR>
-nnoremap <C-g> :GFiles<CR>
-nnoremap <C-f> :Rg<CR> 
+
+
+" Project Navigation
+"==============================================================
+
+if has('nvim-0.5')
+  nnoremap <C-g> :lua require('telescope.builtin').git_files()<CR>
+  let $FZF_DEFAULT_COMMAND='rg --files'
+  nnoremap <C-p> :Files<CR>
+
+  let $FZF_DEFAULT_OPTS='--reverse'
+  let g:fzf_layout = { 'window': {'width': 0.8, 'height': 0.8} }
+
+  nnoremap <C-f> :lua require('telescope.builtin').live_grep()<CR>
+else
+	" requires silversearcher-ag
+	" used to ignore gitignore files
+  let $FZF_DEFAULT_COMMAND='rg --files'
+	"let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+	" fzf config
+	let $FZF_DEFAULT_OPTS='--reverse'
+	let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+	nnoremap <C-p> :Files<CR>
+	nnoremap <C-o> :Buffers<CR>
+	nnoremap <C-g> :GFiles<CR>
+	nnoremap <C-f> :Rg<CR>
+
+
+  " set fzf to respect .gitignore
+  "nnoremap <C-p> :Files<CR>
+
+  "let $FZF_DEFAULT_OPTS='--reverse'
+  "let g:fzf_layout = { 'window': {'width': 0.8, 'height': 0.8} }
+
+  " project search/replace
+  "nnoremap <leader>ps :Rg<SPACE>
+  "nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
+endif
 
 " turn terminal to normal mode with escape
 tnoremap <Esc> <C-\><C-n>
@@ -152,12 +171,12 @@ inoremap <S-Tab> <esc>la
 inoremap jj <ESC>
 
 " coc config {{
-"let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 let g:coc_global_extensions = [
-            \'coc-snippets',
-            \'coc-pairs',
-            \'coc-json',
-            \]
+						\'coc-snippets',
+						\'coc-pairs',
+						\'coc-json',
+						\]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
 	let g:coc_global_extensions += ['coc-prettier']
 endif
@@ -165,7 +184,7 @@ endif
 if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
 	let g:coc_global_extensions += ['coc-eslint']
 endif
-" use <tab> for trigger completion and navigate to the next complete item
+ "use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~ '\s'
@@ -174,16 +193,19 @@ inoremap <silent><expr> <Tab>
 			\ pumvisible() ? "\<C-n>" :
 			\ <SID>check_back_space() ? "\<Tab>" :
 			\ coc#refresh()
-" }}
+"}}
 
 " commenter with iterms
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 
+let g:syntastic_javascript_checkers = ['eslint']
 " ale config
 let g:ale_fixers = {
  \ 'javascript': ['eslint']
  \ }
+let g:ale_linters = {'javascript': ['eslint']}
+
 
 "let g:ale_sign_error = '❌'
 "let g:ale_sign_warning = '⚠️'
@@ -246,4 +268,4 @@ nmap <Leader>h :bprevious<CR>
 "let g:lightline_buffer_minfextlen = 3
 
 "" reserve length for other component (e.g. info, close)
-"let g:lightline_buffer_reservelen = 20
+"let g:lightline_buffer_reservelen = 2;
