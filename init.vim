@@ -167,6 +167,10 @@ noremap <Leader>Y "+y
 noremap <Leader>P "+p
 inoremap <S-Tab> <esc>la
 
+" resize split size
+nnoremap <Leader>- :vertical resize -10<cr>
+nnoremap <Leader>= :vertical resize +10<cr>
+
 " my own command
 inoremap jj <ESC>
 
