@@ -68,6 +68,8 @@ call plug#begin("~/.vim/plugged")
 
 	" comment code with iterms settings
 	Plug 'scrooloose/nerdcommenter'
+	Plug 'tpope/vim-commentary'
+
 
 	" Auto formatting and import ordering
 	Plug 'w0rp/ale'
@@ -121,7 +123,7 @@ let g:NERDTreeStatusline = ''
 " Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
-nnoremap <silent> <C-b> :NERDTreeToggle<CR>
+nnoremap <silent> <C-v> :NERDTreeToggle<CR>
 nnoremap <C-i> :NERDTreeFind<CR>
 
 
@@ -225,6 +227,8 @@ inoremap <silent><expr> <Tab>
 " commenter with iterms
 vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
+noremap <Leader>v :Commentary<cr>
+let NERDTreeHighlightCursorline = 0
 
 " ale config
 let g:ale_fixers = {
