@@ -53,6 +53,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'Xuyuanp/nerdtree-git-plugin'
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-fugitive'
+	Plug 'kdheepak/lazygit.nvim'
 
   " File Explorer with Icons
 	Plug 'scrooloose/nerdtree'
@@ -61,7 +62,7 @@ call plug#begin("~/.vim/plugged")
    " File Search
 	Plug 'nvim-lua/popup.nvim'
 	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-lua/telescope.nvim', { 'branch': 'revert-157-results_width'}
+	Plug 'nvim-lua/telescope.nvim' , { 'branch': 'revert-157-results_width'}
 	Plug 'kyazdani42/nvim-web-devicons'
 	"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	"Plug 'junegunn/fzf.vim'
@@ -77,6 +78,8 @@ call plug#begin("~/.vim/plugged")
 	" python"
 	Plug 'davidhalter/jedi-vim'
 
+	"android"
+	Plug 'hsanson/vim-android'
 	
 	" The status bar
 	"Plug 'tjdevries/express_line.nvim'
@@ -107,7 +110,7 @@ endif
 syntax enable
 "colorscheme challenger_deep
 "let ayucolor="light"
-"let ayucolor="mirage"
+"let ayucolor="mirage"*/
 let ayucolor="dark"
 colorscheme ayu
 "colorscheme gruvbox
@@ -200,6 +203,11 @@ inoremap jj <ESC>
 "END
 
 " coc config {{
+nmap <silent> gD <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
 let g:coc_global_extensions = [
             \'coc-snippets',
             \'coc-pairs',
@@ -309,11 +317,25 @@ if has("autocmd")
 endif
 
 " Tab navigate config
-nnoremap tn :tabnew<Space>
+nnoremap <Leader>t :tabe %<cr>
+"nnoremap tn :tabnew<Space>
 nnoremap tk :tabnext<CR>
 nnoremap tj :tabprev<CR>
 nnoremap th :tabfirst<CR>
 nnoremap tl :tablast<CR>
+nnoremap <Leader>1 :1tabnext<CR>
+nnoremap <Leader>2 :2tabnext<CR>
+nnoremap <Leader>3 :3tabnext<CR>
+nnoremap <leader>4 :4tabnext<CR>
+nnoremap <leader>5 :5tabnext<CR>
+nnoremap <leader>6 :6tabnext<CR>
+"nnoremap <leader>7 :7tabnext<CR>
+"nnoremap <leader>8 :8tabnext<CR>
+"nnoremap <leader>9 :9tabnext<CR>
+
+" Git config
+nnoremap <silent> <leader>lg :LazyGit<CR>
+
 
  "lightline-buffer ui settings
  "replace these symbols with ascii characters if your environment does not support unicode
