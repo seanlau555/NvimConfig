@@ -24,8 +24,8 @@ call plug#begin("~/.vim/plugged")
 	Plug 'tjdevries/nlua.nvim'
 
   " Theme
-  "Plug 'morhetz/gruvbox'
-	"Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+    Plug 'morhetz/gruvbox'
+	Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 	Plug 'ayu-theme/ayu-vim'
 	
 	"Plug 'edkolev/tmuxline.vim'
@@ -54,29 +54,32 @@ call plug#begin("~/.vim/plugged")
 	Plug 'airblade/vim-gitgutter'
 	Plug 'tpope/vim-fugitive'
 	Plug 'kdheepak/lazygit.nvim'
+	Plug 'rbong/vim-flog'
 
   " File Explorer with Icons
 	Plug 'scrooloose/nerdtree'
 	Plug 'ryanoasis/vim-devicons'
 
    " File Search
-	Plug 'nvim-lua/popup.nvim'
-	Plug 'nvim-lua/plenary.nvim'
-	Plug 'nvim-lua/telescope.nvim' , { 'branch': 'revert-157-results_width'}
-	Plug 'kyazdani42/nvim-web-devicons'
-	"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	"Plug 'junegunn/fzf.vim'
+	"Plug 'nvim-lua/popup.nvim'
+	"Plug 'nvim-lua/plenary.nvim'
+	"Plug 'nvim-lua/telescope.nvim' ", { 'branch': 'revert-157-results_width'}
+	"Plug 'kyazdani42/nvim-web-devicons'
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf.vim'
 
 	" comment code with iterms settings
 	Plug 'scrooloose/nerdcommenter'
 	Plug 'tpope/vim-commentary'
 
+	" juptyer notebook 
+	Plug 'untitled-ai/jupyter_ascending.vim'
 
 	" Auto formatting and import ordering
 	Plug 'w0rp/ale'
 
 	" python"
-	Plug 'davidhalter/jedi-vim'
+	"Plug 'davidhalter/jedi-vim'
 
 	"android"
 	Plug 'hsanson/vim-android'
@@ -86,7 +89,7 @@ call plug#begin("~/.vim/plugged")
 	Plug 'itchyny/lightline.vim'
 	Plug 'taohexxx/lightline-buffer'
 	let g:lightline = { 
-			\  'colorscheme': 'challenger_deep',
+			\  'colorscheme': 'ayu',
 			\  'active': {
 			\    'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified', 'cocstatus', 'gitbranch']],
 			\  },
@@ -110,7 +113,7 @@ endif
 syntax enable
 "colorscheme challenger_deep
 "let ayucolor="light"
-"let ayucolor="mirage"*/
+"let ayucolor="mirage"
 let ayucolor="dark"
 colorscheme ayu
 "colorscheme gruvbox
@@ -133,17 +136,25 @@ nnoremap <C-i> :NERDTreeFind<CR>
 " Project Navigation
 "==============================================================
 
-if has('nvim-0.5')
-  " telescope
-	nnoremap <C-g> :lua require('telescope.builtin').git_files()<CR>
-	let $FZF_DEFAULT_COMMAND='rg --files'
-	nnoremap <C-p> :Files<CR>
-
-	let $FZF_DEFAULT_OPTS='--reverse'
-	let g:fzf_layout = { 'window': {'width': 0.8, 'height': 0.8} }
-
-	nnoremap <C-f> :lua require('telescope.builtin').live_grep()<CR>
-else
+"if has('nvim-0.5')
+"  " telescope
+"lua <<EOF
+"require('telescope').setup {
+"	defaults = {
+"		file_ignore_patterns = { "env/.*", "%.env" },
+"		default_icon = false
+"	}
+"}
+"EOF]
+"	nnoremap <C-g> :lua require('telescope.builtin').git_files()<CR>
+"	let $FZF_DEFAULT_COMMAND='rg --files'
+"	nnoremap <C-p> :Files<CR>
+"
+"	let $FZF_DEFAULT_OPTS='--reverse'
+"	let g:fzf_layout = { 'window': {'width': 0.8, 'height': 0.8} }
+"
+"	nnoremap <C-f> :lua require('telescope.builtin').live_grep()<CR>
+"else
 	" requires silversearcher-ag
 	" used to ignore gitignore files
   let $FZF_DEFAULT_COMMAND='rg --files'
@@ -155,7 +166,7 @@ else
 	nnoremap <C-o> :Buffers<CR>
 	nnoremap <C-g> :GFiles<CR>
 	nnoremap <C-f> :Rg<CR>
-endif
+"endif
 
 
 " turn terminal to normal mode with escape
@@ -237,6 +248,7 @@ vmap ++ <plug>NERDCommenterToggle
 nmap ++ <plug>NERDCommenterToggle
 noremap <Leader>v :Commentary<cr>
 let NERDTreeHighlightCursorline = 0
+set lazyredraw
 
 " ale config
 let g:ale_fixers = {
