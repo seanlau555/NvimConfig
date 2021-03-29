@@ -47,3 +47,4 @@ npm install -g typescript-language-server
 configs[server_name].install = installer.install
 configs[server_name].install_info = installer.info
 -- vim:et ts=2 sw=2
+

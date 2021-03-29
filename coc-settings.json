@@ -1,7 +1,9 @@
+
 {
 	"html.autoClosingTags": true,
   // Require .prettierrc
   "prettier.requireConfig": true,
+  "diagnostic.checkCurrentLine": true,
 
   // Tslint on save
   "tslint.enable": false,
@@ -12,10 +14,21 @@
     "css",
     "markdown",
     "Markdown",
-		"python",
+	"python",
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
-  ]
+  ],
+
+  "diagnostic.virtualText": true,
+  "diagnostic.messageTarget": "echo",
+  // python settings
+  "python.linting.pylintEnabled": false,
+  "python.jediEnabled": false,
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.formatting.blackArgs": ["--line-length", "79"]
+
 }
