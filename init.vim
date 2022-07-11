@@ -28,19 +28,22 @@ call plug#begin("~/.vim/plugged")
 	Plug 'tjdevries/nlua.nvim'
 
   " Theme
-    "Plug 'morhetz/gruvbox'
-	"Plug 'mhartington/oceanic-next'
-	"Plug 'junegunn/seoul256.vim'
+    Plug 'morhetz/gruvbox'
 	Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 	Plug 'ayu-theme/ayu-vim'
-	"Plug 'ajmwagar/vim-deus'
-	Plug 'sainnhe/sonokai'
+	Plug 'joshdick/onedark.vim'
+
+	" Plug 'rhysd/vim-color-spring-night'
+	" Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+	" Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
+	" Plug 'mangeshrex/uwu.vim'
+	" Plug 'ajmwagar/vim-deus'
 
 	
 	"Plug 'edkolev/tmuxline.vim'
 	" Tab manager"
 	"Plug 'pacha/vem-tabline'
-  "Plug 'romgrk/barbar.nvim'
+	"Plug 'romgrk/barbar.nvim'
 
 	"Language Client
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -58,10 +61,13 @@ call plug#begin("~/.vim/plugged")
 	Plug 'vim-python/python-syntax'
 	"Plug 'udalov/kotlin-vim'
 	"golang"
-	"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+	Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 	"android"
 	"Plug 'hsanson/vim-android'
 
+
+	" markdown preview
+	Plug 'ellisonleao/glow.nvim'
 
 	" Git 
 	Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -72,6 +78,8 @@ call plug#begin("~/.vim/plugged")
 	"Plug 'sjl/gundo.vim'
 
   " File Explorer with Icons
+	" Plug 'kyazdani42/nvim-web-devicons' " for file icons
+	" Plug 'kyazdani42/nvim-tree.lua'
 	Plug 'preservim/nerdtree'
 	"Plug 'ryanoasis/vim-devicons'
 
@@ -81,8 +89,8 @@ call plug#begin("~/.vim/plugged")
 	Plug 'nvim-telescope/telescope.nvim' , { 'branch': 'various_fixes'}
 	"Plug 'nvim-telescope/telescope-fzy-native.nvim' ", { 'branch': 'revert-157-results_width'}
 	Plug 'kyazdani42/nvim-web-devicons'
-	"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-	"Plug 'junegunn/fzf.vim'
+	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+	Plug 'junegunn/fzf.vim'
 
 	" comment code with iterms settings
 	Plug 'scrooloose/nerdcommenter'
@@ -93,6 +101,7 @@ call plug#begin("~/.vim/plugged")
 
 	" Auto formatting and import ordering
 	Plug 'w0rp/ale'
+	Plug 'rust-lang/rust.vim'
 
 	" python"
 	"Plug 'davidhalter/jedi-vim'
@@ -106,10 +115,10 @@ call plug#begin("~/.vim/plugged")
 	Plug 'itchyny/lightline.vim'
 	Plug 'taohexxx/lightline-buffer'
 
-
+	" \  'colorscheme': 'catppuccin',
 	call lightline#colorscheme()
 	let g:lightline = { 
-			\  'colorscheme': 'ayu',
+			\  'colorscheme': 'onedark',
 			\  'active': {
 			\   'left': [['mode', 'paste'], ['readonly', 'relativepath', 'modified', 'cocstatus']],
 			\	'right': [ [ 'lineinfo' ],
@@ -122,9 +131,7 @@ call plug#begin("~/.vim/plugged")
 			\}
 			"\   'cocstatus': 'coc#status',
 			"\   'bufferinfo': 'lightline#buffer#bufferinfo',
-
- "Plug 'vim-airline/vim-airline'
- "Plug 'vim-airline/vim-airline-themes'
+			" \  'colorscheme': 'challenger_deep',
 
 call plug#end()
 
@@ -138,13 +145,26 @@ au BufRead,BufNewFile *.go set filetype=go
 
 " Theme
 syntax enable
-"colorscheme challenger_deep
+" colorscheme challenger_deep
 "let ayucolor="light"
 let ayucolor="mirage"
 "let ayucolor="dark"
-colorscheme ayu
-"colorscheme OceanicNext
-"colorscheme gruvbox
+" colorscheme uwu
+" colorscheme ayu
+" colorscheme catppuccin
+" colorscheme spring-night
+" colorscheme onenord
+colorscheme onedark
+"
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark = 'medium'
+" let g:gruvbox_italic='1'
+" let g:gruvbox_sign_column='bg0'
+" let g:gruvbox_invert_selection=0
+" let g:gruvbox_termcolors=256
+" hi GruvboxRed guifg=#d75151
+
+
 "colorscheme seoul256
 "set background=dark
 "let g:seoul256_background = 233
@@ -160,15 +180,22 @@ let g:python_highlight_all = 1
 
 
 
-"nnoremap <C-v> :LuaTreeToggle<CR>
-"nnoremap <leader>r :LuaTreeRefresh<CR>
-"nnoremap <C-i> :LuaTreeFindFile<CR>
-"highlight LuaTreeFolderName guifg=#E6B450
-"set termguicolors " this variable must be enabled for colors to be applied properly
+" autocmd VimEnter * LuaTree
+" nnoremap <C-v> :LuaTreeToggle<CR>
+" nnoremap <leader>r :LuaTreeRefresh<CR>
+" nnoremap <C-i> :LuaTreeFindFile<CR>
+" highlight LuaTreeFolderName guifg=#E6B450
+" set termguicolors " this variable must be enabled for colors to be applied properly
 
 " terminal
 nnoremap <silent> <C-z> :ToggleTerminal<Enter>
 tnoremap <silent> <C-z> <C-\><C-n><Enter>
+
+
+" autocmd VimEnter * NvimTree
+" nnoremap <C-v> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <C-i> :NvimTreeFindFile<CR>
 
 autocmd VimEnter * NERDTree
 let g:NERDTreeShowHidden = 1
@@ -177,7 +204,7 @@ let g:NERDTreeIgnore = []
 let g:NERDTreeStatusline = ''
 "let g:NERDTreeWinPos = "right"
 
-" Automaticaly close nvim if NERDTree is only thing left open
+"" Automaticaly close nvim if NERDTree is only thing left open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Toggle
 nnoremap <silent> <C-v> :NERDTreeToggle<CR>
@@ -281,6 +308,11 @@ nnoremap <Leader>= :vertical resize +10<cr>
 nnoremap <Leader>[ :res -5<cr>
 nnoremap <Leader>] :res +5<cr>
 
+
+" Press* to search term under the cursor
+nnoremap <Leader>e :%s///g<Left><Left>
+nnoremap <Leader>ec :%s///gc<Left><Left><Left>
+
 " fugitive mapping
 nmap <leader>gs :G<CR>
 nmap <leader>gh :diffget //3<CR>
@@ -308,11 +340,21 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+	if (index(['vim', 'help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunction
+
 let g:coc_global_extensions = [
             \'coc-snippets',
             \'coc-pairs',
             \'coc-json',
-            \'coc-python',
+            \'coc-pyright',
             \]
 if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
   let g:coc_global_extensions += ['coc-prettier']
@@ -330,6 +372,9 @@ inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+
 " }}
 
 " commenter with iterms
@@ -478,3 +523,4 @@ let g:lightline_buffer_minfextlen = 3
 
 " reserve length for other component (e.g. info, close)
 let g:lightline_buffer_reservelen = 20
+
