@@ -1,4 +1,7 @@
 return {
+  -- {
+  --   "alaviss/nim.nvim"
+  -- },
 	{
 		"numToStr/Comment.nvim",
 		opts = {},
