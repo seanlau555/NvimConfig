@@ -23,12 +23,12 @@ return {
     config = function()
       require("neo-tree").setup({
         filesystem = {
-          filtered_items = {
-         visible = true,
-         show_hidden_count = true,
-         hide_dotfiles = false,
-         hide_gitignored = false,
-        }
+           filtered_items = {
+           visible = true,
+           show_hidden_count = true,
+           hide_dotfiles = false,
+           hide_gitignored = false,
+          }
         }
       })
       vim.keymap.set('n', '<C-v>', ':Neotree toggle<CR>', {})
