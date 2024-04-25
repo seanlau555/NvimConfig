@@ -3,6 +3,11 @@ return {
     "williamboman/mason.nvim",
     config = function()
       require("mason").setup()
+      -- stylua
+      -- prettier
+      -- black
+      -- isort
+      -- spell
     end
   },
   {
