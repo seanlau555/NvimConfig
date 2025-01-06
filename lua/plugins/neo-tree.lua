@@ -22,22 +22,25 @@ return {
     },
     config = function()
       require("neo-tree").setup({
+        git = {
+          enable = true,
+          timeout = 500, -- (in ms)
+        },
         filesystem = {
-           filtered_items = {
-           visible = true,
-           show_hidden_count = true,
-           hide_dotfiles = false,
-           hide_gitignored = false,
-          }
-        }
+          filtered_items = {
+            visible = true,
+            show_hidden_count = true,
+            hide_dotfiles = false,
+            hide_gitignored = false,
+          },
+        },
       })
-      vim.keymap.set('n', '<C-v>', ':Neotree toggle<CR>', {})
-      vim.keymap.set('n', '<C-y>', ':Neotree filesystem reveal left<CR>', {})
+      vim.keymap.set("n", "<C-v>", ":Neotree toggle<CR>", {})
+      vim.keymap.set("n", "<C-y>", ":Neotree filesystem reveal left<CR>", {})
       buffers = { follow_current_file = { enabled = true } }
       -- vim.keymap.set('n', '<C-y>', ':Neotree focus filesystem left<CR>', {})
-  -- nnoremap <silent> <C-v> :NERDTreeToggle<CR>
-  -- nnoremap <silent> <C-y> :NERDTreeFind<CR>
-    end
+      -- nnoremap <silent> <C-v> :NERDTreeToggle<CR>
+      -- nnoremap <silent> <C-y> :NERDTreeFind<CR>
+    end,
   },
 }
-
