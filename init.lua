@@ -45,3 +45,9 @@ vim.keymap.set({ "v" }, "<leader>y", '"*y')
 vim.keymap.set({ "v" }, "<leader>p", '"*p')
 vim.keymap.set({ "v" }, "<leader>Y", '"+y')
 vim.keymap.set({ "v" }, "<leader>P", '"+p')
+
+-- resize window
+vim.keymap.set("n", "=", [[<cmd>vertical resize +5<cr>]]) -- make the window biger vertically
+vim.keymap.set("n", "-", [[<cmd>vertical resize -5<cr>]]) -- make the window smaller vertically
+vim.keymap.set("n", "+", [[<cmd>horizontal resize +5<cr>]]) -- make the window bigger horizontally by pressing shift and =
+vim.keymap.set("n", "_", [[<cmd>horizontal resize -5<cr>]]) -- make the window smaller horizontally by pressing shift and -
