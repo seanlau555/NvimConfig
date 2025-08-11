@@ -11,9 +11,31 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
+vim.o.updatetime = 700
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	callback = function()
+		-- Only show the diagnostic if there's not already one open
+		if not vim.b.diagnostics_float_open then
+			vim.diagnostic.open_float(nil, {
+				focusable = false,
+				close_events = { "CursorMoved", "InsertEnter", "BufLeave" },
+				scope = "cursor",
+			})
+			vim.b.diagnostics_float_open = true
+		end
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+	callback = function()
+		vim.b.diagnostics_float_open = false
+	end,
+})
 
 require("vim-options")
 require("lazy").setup("plugins")
+require("plugins.rust_config")
 
 -- move indent
 local opts = { noremap = true, silent = true }

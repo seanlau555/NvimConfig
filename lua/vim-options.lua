@@ -5,6 +5,6 @@ vim.cmd("set shiftwidth=2")
 vim.cmd("set nu")
 vim.cmd("set nowrap")
 vim.cmd("set relativenumber")
---vim.cmd("set winbar=%m\ %f")
+-- vim.cmd("set winbar=%m %f")
 -- vim.cmd("set clipboard+=unnamedplus")
 vim.g.mapleader = " "

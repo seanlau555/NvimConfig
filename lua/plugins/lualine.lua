@@ -4,7 +4,8 @@ return {
 		require("lualine").setup({
 			options = {
 				-- theme = "gruvbox",
-				theme = "github_dark",
+				theme = "kanagawa",
+				-- theme = "github_dark",
 			},
 		})
 	end,
